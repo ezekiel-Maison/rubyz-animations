@@ -1,0 +1,29 @@
+<h1 class="headline">Hello GSAP World</h1>
+
+<style>
+  .char { display: inline-block; }
+</style>
+
+<!-- Load GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<!-- Split text into characters -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const h1 = document.querySelector('.headline');
+    const text = h1.textContent;
+    h1.innerHTML = text
+      .split('')
+      .map(ch => ch === ' ' ? "<span class='char'>&nbsp;</span>" : `<span class='char'>${ch}</span>`)
+      .join('');
+
+    // animate each character
+    gsap.from(".char", {
+      opacity: 0,
+      x: 60,
+      duration: 0.9,
+      ease: "bounce.out",
+      stagger: 0.07
+    });
+  });
+</script>
