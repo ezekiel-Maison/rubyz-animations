@@ -33,11 +33,30 @@
     }
   </style>
 </head>
+  <script>
+const base = "https://ezekiel-maison.github.io/rubyz-animations/";
+
+fetch(base)
+  .then(res => res.text())
+  .then(html => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    const links = [...doc.querySelectorAll("a")]
+      .filter(a => a.href.endsWith(".html") && !a.href.includes("index.html"));
+    const list = document.querySelector("ul");
+    links.forEach(a => {
+      const name = a.href.split("/").pop().replace(".html", "");
+      const li = document.createElement("li");
+      li.innerHTML = `<a href="${a.href}">${name.replace(/-/g," ")}</a>`;
+      list.appendChild(li);
+    });
+  });
+</script>
 <body>
   <h1>RubyZ Animation Toolbox</h1>
   <p>Click an animation to view it:</p>
   <ul style="list-style: none; padding: 0;">
-    <li><a href="bounce-text.html">Bounce Text</a></li>
+    <li><a href="https://ezekiel-maison.github.io/rubyz-animations/bounce-text.html">Bounce Text</a></li>
     <!-- You’ll add more here later -->
   </ul>
 </body>
